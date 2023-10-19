@@ -26,14 +26,14 @@ struct ContentView: View {
                                     Image(uiImage: fetchImageThumbnail(asset: asset))
                                         .resizable()
                                         .frame(width: UIScreen.main.bounds.width / 5, height: UIScreen.main.bounds.width / 5)
-                                        .aspectRatio(contentMode: .fill)
+                                        .scaledToFill()
                                 }
                             } else if asset.mediaType == .video {
                                 ZStack {
                                     Image(uiImage: fetchImageThumbnail(asset: asset))
                                         .resizable()
                                         .frame(width: UIScreen.main.bounds.width / 5, height: UIScreen.main.bounds.width / 5)
-                                        .aspectRatio(contentMode: .fill)
+                                        .scaledToFill()
                                     Text("Video").foregroundColor(.white)
                                 }
                                 .frame(width: UIScreen.main.bounds.width / 5, height: UIScreen.main.bounds.width / 5)
@@ -72,6 +72,7 @@ struct ContentView: View {
     
     private func fetchAssets() {
         let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         let allAssets = PHAsset.fetchAssets(with: fetchOptions)
         assets.removeAll()
         allAssets.enumerateObjects { (asset, _, _) in
