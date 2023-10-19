@@ -72,7 +72,7 @@ struct ContentView: View {
     
     private func fetchAssets() {
         let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let allAssets = PHAsset.fetchAssets(with: fetchOptions)
         assets.removeAll()
         allAssets.enumerateObjects { (asset, _, _) in
